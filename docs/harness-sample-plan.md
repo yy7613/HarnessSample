@@ -62,8 +62,8 @@ gantt
     section Implementation
     仕様書/計画書作成           :done, a1, 2026-05-06, 1d
     Program.cs 実装            :done, a2, 2026-05-06, 1d
-    README / 文書整備          :active, a3, 2026-05-06, 1d
+    README / 文書整備          :done, a3, 2026-05-06, 1d
     section Validation
-    ビルド確認                  :a4, 2026-05-06, 1d
-    実行確認                    :a5, 2026-05-06, 1d
+    ビルド確認                  :done, a4, 2026-05-06, 1d
+    実行確認                    :done, a5, 2026-05-06, 1d
 ```

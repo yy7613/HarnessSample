@@ -18,7 +18,7 @@ LM Studio の OpenAI 互換 API を使って Microsoft Agent Framework の Harne
 ├─ src/HarnessSample          # アプリ本体
 ├─ tests/HarnessSample.Tests  # xUnit によるユニットテスト
 ├─ scripts                    # API キー設定補助スクリプト
-├─ docs                       # 仕様メモ、計画、記事下書き
+├─ docs                       # 仕様メモと計画書
 └─ .github/workflows          # GitHub Actions CI
 ```
 
