@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="src/HarnessSample/HarnessSample.csproj" />
+  <Project Path="tests/HarnessSample.Tests/HarnessSample.Tests.csproj" />
+</Solution>

@@ -1,0 +1,15 @@
+bin/
+obj/
+TestResults/
+.vs/
+
+.env
+.env.*
+!.env.example
+
+agent-files/
+**/agent-files/
+
+*.user
+*.suo
+*.nupkg
