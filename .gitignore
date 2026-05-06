@@ -3,9 +3,9 @@ obj/
 TestResults/
 .vs/
 
-.env
-.env.*
-!.env.example
+**/.env
+**/.env.*
+!**/.env.example
 
 agent-files/
 **/agent-files/

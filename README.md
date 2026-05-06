@@ -47,6 +47,18 @@ dotnet restore HarnessSample.slnx
 
 Web 検索 Tool を使う場合は、`.env.example` を参考にローカル環境で API キーを設定してください。
 
+```powershell
+Copy-Item .env.example .env
+```
+
+アプリ起動時には次の順で設定を解決します。
+
+- 既に設定済みの OS 環境変数
+- リポジトリ直下の `.env`
+- 互換用の `scripts/.env`
+
+`.env` はローカル開発用の補助です。既存の環境変数は上書きしません。
+
 ### Tavily
 
 ```powershell
@@ -65,6 +77,8 @@ $env:TINYFISH_LANGUAGE = "ja"
 
 - `TAVILY_API_KEY` がある場合、`provider=auto` は Tavily を優先
 - Tavily 未設定で `TINYFISH_API_KEY` がある場合、TinyFish を使用
+- 起動時に `Web Search Tool : enabled (...)` と表示されれば現在のプロセスで有効
+- 他の端末や GUI から User 環境変数を更新した場合は、新しいターミナルを開いてから実行する
 - `.env` は `.gitignore` で除外されるため、実キーはコミットされません
 
 ## 付属スクリプト
@@ -90,8 +104,10 @@ $env:TINYFISH_LANGUAGE = "ja"
 ### `.env` テンプレートを作成
 
 ```powershell
-.\scripts\New-HarnessSampleEnvFile.ps1 -OutputPath ".env"
+\.\scripts\New-HarnessSampleEnvFile.ps1
 ```
+
+既定ではリポジトリ直下に `.env` を作成します。必要なら `-OutputPath` で変更できます。
 
 ## ビルドとテスト
 

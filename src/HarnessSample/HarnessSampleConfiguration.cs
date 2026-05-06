@@ -10,6 +10,8 @@ public sealed record HarnessSampleConfiguration(
 {
     public static HarnessSampleConfiguration Load()
     {
+        DotEnvLoader.LoadIfPresent();
+
         string[] sampleTopics =
         [
             "この HarnessSample 実装の使い方",

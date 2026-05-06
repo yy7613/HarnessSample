@@ -43,6 +43,7 @@ flowchart TD
 - `SubAgentsProvider` で概要・実装観点・レビュー観点を分担する
 - `FileMemoryProvider` はセッションごとに別フォルダーを作る
 - 保存ファイル名は `harness-result.md` に固定する
+- Web 検索設定は OS 環境変数を優先しつつ、ローカル開発用に `.env` も自動読込する
 
 ## リスクと対策
 

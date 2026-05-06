@@ -16,8 +16,11 @@
 
 ## 対象範囲
 
-- 対象プロジェクト: `HarnessSample.csproj`
-- 対象ファイル: `Program.cs`
+- 対象プロジェクト: `src/HarnessSample/HarnessSample.csproj`
+- 主な対象ファイル:
+    - `src/HarnessSample/Program.cs`
+    - `src/HarnessSample/HarnessSampleConfiguration.cs`
+    - `src/HarnessSample/WebSearchToolConfiguration.cs`
 - 出力先: `bin/.../agent-files/` 配下
 
 ## 接続要件
@@ -27,6 +30,13 @@
 - Endpoint: `http://localhost:1234/v1`
 - Model: `openai/gpt-oss-20b`
 - API Key: `sk-dummy`
+
+## Web 検索設定
+
+- `TAVILY_API_KEY` または `TINYFISH_API_KEY` を設定すると Web 検索 Tool を有効化できる
+- 設定ソースの優先順位は「OS 環境変数 → リポジトリ直下の `.env` → `scripts/.env`」とする
+- `.env` はローカル開発補助であり、既存の環境変数を上書きしない
+- `provider=auto` は Tavily を優先し、Tavily 未設定時のみ TinyFish を使う
 
 ## 実行シナリオ
 
@@ -94,4 +104,5 @@ sequenceDiagram
 
 - `dotnet build` が成功する
 - LM Studio 稼働時に `HarnessSample` が実行できる
+- `.env` または環境変数設定時に起動表示で Web 検索 Tool が `enabled` になる
 - 実行結果として TODO 状態、サブエージェント結果、保存ファイル確認ができる

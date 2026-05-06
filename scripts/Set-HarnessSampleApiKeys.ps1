@@ -43,15 +43,18 @@ if ([string]::IsNullOrWhiteSpace($TavilyApiKey) -and [string]::IsNullOrWhiteSpac
 
 Set-HarnessEnvironmentVariable -Name "TAVILY_API_KEY" -Value $TavilyApiKey -TargetScope $Scope
 Set-HarnessEnvironmentVariable -Name "TINYFISH_API_KEY" -Value $TinyFishApiKey -TargetScope $Scope
-Set-HarnessEnvironmentVariable -Name "TINYFISH_LOCATION" -Value $TinyFishLocation -TargetScope $Scope
-Set-HarnessEnvironmentVariable -Name "TINYFISH_LANGUAGE" -Value $TinyFishLanguage -TargetScope $Scope
+
+if (-not [string]::IsNullOrWhiteSpace($TinyFishApiKey)) {
+    Set-HarnessEnvironmentVariable -Name "TINYFISH_LOCATION" -Value $TinyFishLocation -TargetScope $Scope
+    Set-HarnessEnvironmentVariable -Name "TINYFISH_LANGUAGE" -Value $TinyFishLanguage -TargetScope $Scope
+}
 
 Write-Host ""
 Write-Host "HarnessSample 用の API キー設定が完了しました。" -ForegroundColor Cyan
 Write-Host "- TAVILY_API_KEY     : $(if ($TavilyApiKey) { 'configured' } else { 'skipped' })"
 Write-Host "- TINYFISH_API_KEY  : $(if ($TinyFishApiKey) { 'configured' } else { 'skipped' })"
-Write-Host "- TINYFISH_LOCATION : $(if ($TinyFishLocation) { $TinyFishLocation } else { 'skipped' })"
-Write-Host "- TINYFISH_LANGUAGE : $(if ($TinyFishLanguage) { $TinyFishLanguage } else { 'skipped' })"
+Write-Host "- TINYFISH_LOCATION : $(if ($TinyFishApiKey -and $TinyFishLocation) { $TinyFishLocation } else { 'skipped' })"
+Write-Host "- TINYFISH_LANGUAGE : $(if ($TinyFishApiKey -and $TinyFishLanguage) { $TinyFishLanguage } else { 'skipped' })"
 
 if ($Scope -eq "User") {
     Write-Host "新しいターミナルを開くと User 環境変数としても利用できます。" -ForegroundColor Cyan
