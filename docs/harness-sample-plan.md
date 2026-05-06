@@ -34,7 +34,7 @@ flowchart TD
 | P4 | 実行フロー実装 | plan→execute の 2 段階実行と対話ループ |
 | P5 | 可視化実装 | 応答、TODO、StateBag、保存ファイルを表示 |
 | P6 | 検証 | ビルド成功、LM Studio で実行確認 |
-| P7 | ドキュメント整備 | README と Zenn 記事を作成 |
+| P7 | ドキュメント整備 | README と補助ドキュメントを整備 |
 
 ## 実装メモ
 
@@ -62,7 +62,7 @@ gantt
     section Implementation
     仕様書/計画書作成           :done, a1, 2026-05-06, 1d
     Program.cs 実装            :done, a2, 2026-05-06, 1d
-    README / Zenn 執筆         :active, a3, 2026-05-06, 1d
+    README / 文書整備          :active, a3, 2026-05-06, 1d
     section Validation
     ビルド確認                  :a4, 2026-05-06, 1d
     実行確認                    :a5, 2026-05-06, 1d

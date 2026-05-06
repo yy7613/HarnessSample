@@ -160,4 +160,7 @@ sequenceDiagram
 
 - [docs/harness-sample-spec.md](docs/harness-sample-spec.md)
 - [docs/harness-sample-plan.md](docs/harness-sample-plan.md)
-- [docs/harness-sample-zenn.md](docs/harness-sample-zenn.md)
+
+## ライセンス
+
+このリポジトリは MIT License の下で提供します。詳細は LICENSE を参照してください。
