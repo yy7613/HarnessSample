@@ -56,15 +56,15 @@ public static class HarnessRuntimeFactory
             ユーザーのテーマについて、注意点、落とし穴、動作確認チェックリストを日本語で整理してください。短く明確にまとめてください。
             """);
 
-        var subAgentsProvider = new SubAgentsProvider(
+        var backgroundAgentsProvider = new BackgroundAgentsProvider(
             [overviewSubAgent, implementationSubAgent, reviewSubAgent],
-            new SubAgentsProviderOptions
+            new BackgroundAgentsProviderOptions
             {
                 Instructions =
                     "サブエージェントを使うときは、まず必要なタスクを並列に開始してください。" +
                     configuration.HarnessReference +
                     "回答は必ず提供された参照情報の範囲に限定し、確認できない情報は書かないでください。" +
-                    "結果を集約してから最終回答を作ってください。利用可能なサブエージェント一覧: {sub_agents}"
+                    "結果を集約してから最終回答を作ってください。利用可能なサブエージェント一覧: {background_agents}"
             });
 
         var fileMemoryProvider = new FileMemoryProvider(
@@ -79,9 +79,9 @@ public static class HarnessRuntimeFactory
         ChatClientAgentOptions parentOptions = new()
         {
             Name = "HarnessSampleAgent",
-            Description = "Harness の Todo / Mode / SubAgents / FileMemory / WebSearch を LM Studio で確認する親エージェントです。",
+            Description = "Harness の Todo / Mode / BackgroundAgents / FileMemory / WebSearch を LM Studio で確認する親エージェントです。",
             ChatHistoryProvider = chatHistoryProvider,
-            AIContextProviders = [harnessReferenceProvider, todoProvider, agentModeProvider, subAgentsProvider, fileMemoryProvider],
+            AIContextProviders = [harnessReferenceProvider, todoProvider, agentModeProvider, backgroundAgentsProvider, fileMemoryProvider],
             ChatOptions = new ChatOptions
             {
                 Instructions =
@@ -90,8 +90,8 @@ public static class HarnessRuntimeFactory
                     webSearchInstructions +
                     "Web検索 Tool を使った場合は、結果をそのまま列挙するだけでなく、必要に応じて構造化して整理してください。" +
                     "提供された参照情報から確認できる内容だけを述べてください。確認できない情報は『このサンプル実装からは確認できません』と述べてください。" +
-                    "plan モードでは TodoList を作成し、どのサブエージェントへ依頼するか決めてください。" +
-                    "execute モードでは必ず SubAgentsProvider を使って複数のサブエージェントへ並列に依頼し、必要なら Web検索 Tool も使って結果を統合してください。" +
+                    "plan モードでは Todo を作成し、どのサブエージェントへ依頼するか決めてください。" +
+                    "execute モードでは必ず BackgroundAgentsProvider を使って複数のサブエージェントへ並列に依頼し、必要なら Web検索 Tool も使って結果を統合してください。" +
                     "作業完了時は Todo を更新し、最終結果を SaveFile で Markdown として保存してください。" +
                     "日時が必要な場合のみ {{GetDateTime}} を使ってください。応答は日本語で行ってください。",
                 Tools = [AIFunctionFactory.Create(HarnessTools.GetDateTime), AIFunctionFactory.Create(structuredAggregator.AggregateAsync), .. webSearchTools],

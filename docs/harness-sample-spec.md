@@ -9,7 +9,7 @@
 - LM Studio 接続設定を既存コードのまま再利用する
 - `TodoProvider` によるタスク管理
 - `AgentModeProvider` による `plan` / `execute` モード管理
-- `SubAgentsProvider` によるサブエージェント委譲
+- `BackgroundAgentsProvider` によるサブエージェント委譲
 - `FileMemoryProvider` による結果の Markdown 保存
 - セッション状態の可視化
 - 入力例付きの対話ループ
@@ -56,7 +56,7 @@ flowchart TD
     P --> A[ChatClientAgent]
     A --> T[TodoProvider]
     A --> M[AgentModeProvider]
-    A --> SA[SubAgentsProvider]
+    A --> SA[BackgroundAgentsProvider]
     SA --> S1[OverviewResearchAgent]
     SA --> S2[ImplementationAdviceAgent]
     SA --> S3[ReviewChecklistAgent]
@@ -73,19 +73,19 @@ sequenceDiagram
     participant Program
     participant Agent
     participant Providers as Harness Providers
-    participant SubAgents
+    participant BackgroundAgents
     participant LMStudio
     participant FileStore
 
     User->>Program: テーマ入力
     Program->>Agent: plan 用プロンプト送信
-    Agent->>Providers: Todo / Mode / SubAgents コンテキスト取得
+    Agent->>Providers: Todo / Mode / BackgroundAgents コンテキスト取得
     Agent->>LMStudio: 推論要求
     LMStudio-->>Agent: 応答
     Agent-->>Program: 計画結果
     Program->>Agent: execute 用プロンプト送信
-    Agent->>SubAgents: 複数サブタスクを並列開始
-    SubAgents-->>Agent: 調査結果を返却
+    Agent->>BackgroundAgents: 複数サブタスクを並列開始
+    BackgroundAgents-->>Agent: 調査結果を返却
     Agent->>Providers: Todo / FileMemory 更新
     Agent->>LMStudio: 推論要求
     LMStudio-->>Agent: 応答

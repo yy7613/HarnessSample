@@ -56,11 +56,11 @@ public static class ConsoleRenderer
         return trimmed;
     }
 
-    public static void PrintTodos(TodoProvider todoProvider, AgentSession session)
+    public static async Task PrintTodosAsync(TodoProvider todoProvider, AgentSession session)
     {
         PrintSection("TodoList");
 
-        IReadOnlyList<TodoItem> todos = todoProvider.GetAllTodos(session);
+        IReadOnlyList<TodoItem> todos = await todoProvider.GetAllTodosAsync(session);
         if (todos.Count == 0)
         {
             Console.WriteLine("TODO はまだ作成されていません。");

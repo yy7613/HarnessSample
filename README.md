@@ -6,7 +6,7 @@ LM Studio の OpenAI 互換 API を使って Microsoft Agent Framework の Harne
 
 - `TodoProvider`
 - `AgentModeProvider`
-- `SubAgentsProvider`
+- `BackgroundAgentsProvider`
 - `FileMemoryProvider`
 - `Tavily` / `TinyFish` ベースの Web 検索 Tool
 - 対話ループによる複数テーマの試行
@@ -144,7 +144,7 @@ sequenceDiagram
     participant User
     participant Program
     participant Parent as Parent Agent
-    participant Subs as Sub Agents
+    participant Bg as Background Agents
     participant Search as Web Search Tool
     participant LM as LM Studio
     participant Store as File Store
@@ -154,12 +154,12 @@ sequenceDiagram
     Parent->>LM: 推論
     LM-->>Parent: TODO / 方針
     Program->>Parent: execute 実行
-    Parent->>Subs: 並列委譲
+    Parent->>Bg: 並列委譲
     Parent->>Search: 必要に応じて Web 検索
-    Subs->>LM: 推論
+    Bg->>LM: 推論
     Search-->>Parent: 検索結果
-    LM-->>Subs: 各観点の結果
-    Subs-->>Parent: 結果集約
+    LM-->>Bg: 各観点の結果
+    Bg-->>Parent: 結果集約
     Parent->>Store: harness-result.md 保存
     Parent-->>Program: 最終要約
     Program-->>User: TODO / StateBag / 保存内容表示

@@ -9,7 +9,7 @@ Harness 公式サンプルの考え方を取り込みつつ、既存の LM Studi
 - 既存の `OpenAIClient` + `AsIChatClient()` 構成を維持する
 - Harness の主要プロバイダーを `ChatClientAgentOptions.AIContextProviders` に追加する
 - 実行シナリオは `plan` と `execute` の 2 段階に分ける
-- Step02 を踏まえ、`SubAgentsProvider` による委譲も取り入れる
+- Step02 を踏まえ、`BackgroundAgentsProvider` による委譲も取り入れる
 - 最終成果物を Markdown ファイルとして保存し、プログラム側で読み出して確認する
 
 ## 実施ステップ
@@ -30,7 +30,7 @@ flowchart TD
 | --- | --- | --- |
 | P1 | 既存 LM Studio 設定の維持 | 接続先とモデル名を変更しない |
 | P2 | Harness Provider 導入 | Todo / Mode / FileMemory を利用可能にする |
-| P3 | SubAgents 導入 | 親エージェントから複数サブエージェントへ委譲可能にする |
+| P3 | BackgroundAgents 導入 | 親エージェントから複数サブエージェントへ委譲可能にする |
 | P4 | 実行フロー実装 | plan→execute の 2 段階実行と対話ループ |
 | P5 | 可視化実装 | 応答、TODO、StateBag、保存ファイルを表示 |
 | P6 | 検証 | ビルド成功、LM Studio で実行確認 |
@@ -40,7 +40,7 @@ flowchart TD
 
 - `TodoProvider` で計画タスクを保持する
 - `AgentModeProvider` の初期モードは `plan` とする
-- `SubAgentsProvider` で概要・実装観点・レビュー観点を分担する
+- `BackgroundAgentsProvider` で概要・実装観点・レビュー観点を分担する
 - `FileMemoryProvider` はセッションごとに別フォルダーを作る
 - 保存ファイル名は `harness-result.md` に固定する
 - Web 検索設定は OS 環境変数を優先しつつ、ローカル開発用に `.env` も自動読込する
